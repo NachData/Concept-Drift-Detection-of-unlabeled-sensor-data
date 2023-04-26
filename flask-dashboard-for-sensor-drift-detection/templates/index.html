@@ -1,1 +1,66 @@
+<html>
+<head>
+    <title>Plot</title>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"> 
+    <style>
+        img {
+        float: left;
+        margin: 0;
+        }
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            margin: 20 auto;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            margin-left: 70px;
+        }
+        p {
+            text-align: center;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .alert {
+            text-align: center;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+        .alert-success {
+            background-color: #28A745;
+        }
+        .alert-danger {
+            background-color: #DC3545;
+        }
+    </style>  
+</head>
+<body>
+    <div class="container">
+        <h1>Sensor Drift Detection</h1>
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label for="threshold">Threshold:</label>
+                <input type="number" id="threshold" name="threshold" value="0.1" step="0.01" min="0" max="1" required>  
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+        <img src="data:image/png;base64,{{ image }}" alt="Plot">
+        {% if drift_detected %}
+            <div class="alert alert-danger">
+                Drift detected!
+            </div>
+        {% else %}
+            < class="alert alert-success">
+                No Drift detected!
+        {% endif %}
 
+</body>
